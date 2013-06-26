@@ -110,7 +110,7 @@ Emacs + org-mode + Python
 - You can embed arbitrary LaTeX, HTML, tables, etc... in it
 - Code is executable in the editor, and the results are captured in the editor
 - Enables navigatable "links" to [[file:kitchin-emacs-orgmode-python.org][files]], [[shell:ls][commands]], [[Emacs in a nutshell][locations]], [[http://jkitchin.github.io][urls]], .... 
-- Export engine that converts selected content to PDF, LaTeX, HTML, ascii, etc... (e.g. this presentation!)
+- Export engine that converts selected content to PDF, LaTeX, HTML, ascii, etc... (e.g. this presentation!) \attachfile{kitchin-emacs-orgmode-python.org}
 * Example - shell scripts
 
 #+NAME: shell
@@ -276,7 +276,7 @@ I wish we had an editor as powerful as Emacs that is extensible in Python.
 
 Thanks for your attention!
 
-http://jkitchin.github.io
+https://github.com/jkitchin/scipy2013
 
 * Links to examples 						   :noexport:
 ** Manuscript example
