@@ -1,0 +1,304 @@
+#+DATE: 2013-06-27 Thu
+#+OPTIONS: H:1 texht:t
+#+BEAMER_COLOR_THEME:
+#+BEAMER_FONT_THEME:
+#+BEAMER_HEADER: 
+#+BEAMER_INNER_THEME:
+#+BEAMER_OUTER_THEME:
+#+BEAMER_THEME: default
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS:
+#+LATEX_HEADER: \institute{Carnegie Mellon University}
+#+LATEX_HEADER_EXTRA: \titlegraphic{\includegraphics[width=\textwidth]{header}}
+#+OPTIONS: toc:nil
+#+TITLE: Emacs + org-mode + python in reproducible research
+#+AUTHOR: John Kitchin
+#+latex_header: \mode<beamer>{\usetheme{Madrid}}
+
+
+* Problem to solve #1
+** Computational research workflow
+:PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_env: block
+    :END: 
+1. Setup a lot of calculations (perovskite.py)
+2. Run calculations (run.py)
+   a. Fix a few problem calculations by hand (nawo3.py
+3. Analyze calculations (analysis.py, plot*.py,...)
+4. ...(scripts4-8, miscellaneous command line work)
+5. Try to teach student steps 1-4
+6. Or, try to repeat steps 1-4 myself...
+
+** Lots of scripts
+:PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_env: block
+    :END: 
+[[./ls.png]]
+
+* Problem to solve #2
+** 
+:PROPERTIES:
+    :BEAMER_env: block
+    :BEAMER_col: 0.5
+    :END:
+- Integrating derivation of methods with illustrative code examples
+   + Writing math in comments is tedious
+   + Pasting code and results into text is tedious
+   + Tedious = error-prone
+   + Or in my case: not likely to happen
+
+** 							    :BMCOL:B_example:
+:PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_env: block
+:END: 
+							    [[./blog.png]]
+
+* Problem to solve #3
+** The issue					      :B_ignoreheading:BMCOL:
+:PROPERTIES:
+    :BEAMER_col: 0.4
+    :BEAMER_env: block
+    :END:
+- How did I make this figure?
+  + Where is the script?
+  + Where is the data?
+  + How did I make the data?
+- Or how do I include the data in this figure from another paper in my current paper?
+  
+Data and methods tend to get lost over time as students leave, old computers die, ...
+
+** A figure from a manuscript 				    :BMCOL:B_example:
+    :PROPERTIES:
+    :BEAMER_col: 0.6
+    :BEAMER_env: block
+    :END:
+[[./fig8.png]]
+
+* These problems have related solutions
+- Problem 1 (documenting computational workflow)
+   + Solved if we can do all that work in single document and keep a record of the results of each step
+- Problem 2 (integrating mathematics with code)
+   + Solved if text, data and code can be easily interspersed, and code can be run and output readily captured
+- Problem 3 (how did I make the figure)
+   + Solved if we can keep everything together and export what we want in the form we need
+- The solution is an *editor* that can interact with the computer, a *markup language* that separates code, data and text, and a convenient *programming language*
+- I will present the combination of these that works best for me:
+Emacs + org-mode + Python
+
+* Emacs in a nutshell
+- Emacs is an extensible editor
+   + Extensible in Emacs-Lisp, a full programming language
+      - Users can customize every aspect of the editor
+      - You can add any functionality you want
+      - Like a "browser" for text
+   + Operates in "modes" that provide features
+      - Every major language has a mode: Python, C/C++, Fortran, Shell, LaTeX, markdown, restructured Text, etc...
+      - provides editing functions, syntax highlighting, etc...
+   + Provides complete integration with the operating system
+      - This enables system commands to be run, and the output captured
+
+* Org-mode (http://orgmode.org/)
+"/Org mode is for keeping notes, maintaining TODO lists, planning projects, and authoring documents with a fast and effective plain-text system./"
+
+- Org-mode is written in Emacs-Lisp
+- Outline mode that enables document organization
+- Amazing task management capability
+- Lightweight markup language that differentiates text, data and code
+- You can embed arbitrary LaTeX, HTML, tables, etc... in it
+- Code is executable in the editor, and the results are captured in the editor
+- Enables navigatable "links" to [[file:kitchin-emacs-orgmode-python.org][files]], [[shell:ls][commands]], [[Emacs in a nutshell][locations]], [[http://jkitchin.github.io][urls]], .... 
+- Export engine that converts selected content to PDF, LaTeX, HTML, ascii, etc... (e.g. this presentation!)
+* Example - shell scripts
+
+#+NAME: shell
+#+BEGIN_SRC sh
+ls | sort
+#+END_SRC
+
+#+RESULTS: shell
+#+begin_example
+archive
+blog.png
+dft-book-1.png
+fe-ni-al.png
+fig8.png
+header.png
+kitchin-emacs-orgmode-python.org
+kitchin-emacs-orgmode-python.pdf
+kitchin-emacs-orgmode-python.tex
+ls.png
+pycse-1.png
+pycse-2.png
+#+end_example
+
+* Example with python code
+#+BEGIN_SRC python
+import os
+files =  os.listdir('.')
+files.sort()
+for f in files: print f
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+archive
+blog.png
+dft-book-1.png
+fe-ni-al.png
+fig8.png
+header.png
+kitchin-emacs-orgmode-python.org
+kitchin-emacs-orgmode-python.pdf
+kitchin-emacs-orgmode-python.tex
+ls.png
+pycse-1.png
+pycse-2.png
+#+end_example
+
+* Example with emacs-lisp
+#+BEGIN_SRC emacs-lisp 
+(mapcar (lambda (arg) 
+	  (princ (format "%s\n" arg)))
+	(directory-files "."))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+.
+..
+archive
+blog.png
+dft-book-1.png
+fe-ni-al.png
+fig8.png
+header.png
+kitchin-emacs-orgmode-python.org
+kitchin-emacs-orgmode-python.pdf
+kitchin-emacs-orgmode-python.tex
+ls.png
+pycse-1.png
+pycse-2.png
+#+end_example
+
+* Emacs + org-mode projects
+- PYCSE - http://jkitchin.github.io/pycse 
+  + E-book on python calculations in science and engineering (~300 pages)
+- Python blog - http://jkitchin.github.io 
+  + 169 posts on mostly python, created and published using org-mode and blogofile
+- dft-book - http://jkitchin.github.io/dft-book 
+  + E-book on using python to drive quantum chemistry to compute material properties (~300 pages)
+- Two scientific manuscripts submitted 
+    + "Simulating temperature programmed desorption of oxygen on Pt(111) using DFT derived coverage dependent desorption barriers" to Topics in Catalysis
+    + "Effects of O_2 and SO_2 on the capture capacity of a primary-amine based polymeric CO_2 sorbent" to Industrial & Engineering Chemistry Research
+    + Manuscripts and supporting information were generated in Emacs + org-mode, and exported to LaTeX for submission
+    
+* PYCSE - http://jkitchin.github.io/pycse 
+** Document overview
+:PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_env: block
+    :END: 
+[[./pycse-1.png]]
+- Code is written and executed in the editor. Output captured.
+- Exported to blog, HTML and PDF. Mobi and ePub are also possible.
+
+** A subsection of the document
+:PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_env: block
+    :END: 
+[[./pycse-2.png]]
+
+* dft-book - http://jkitchin.github.io/dft-book 
+** Embedded text, math, code and output.
+:PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_env: block
+    :END: 
+- 300+ pages of using python to run quantum chemical calculations
+- might be 50+% code!
+- Every example written and run in the book
+  + no cut and paste code/results
+  + It ran correctly /at least once/
+
+** 
+:PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_env: block
+    :END: 
+
+[[./dft-book-1.png]]
+
+* Org-mode in documenting computational/research workflow
+** 
+:PROPERTIES:
+    :BEAMER_col: 0.3
+    :BEAMER_env: block
+    :END: 
+- Separation of data generation and analysis promotes data reuse
+- Easier to read scripts
+
+** 
+:PROPERTIES:
+    :BEAMER_col: 0.7
+    :BEAMER_env: block
+    :END: 
+[[./fe-ni-al.png]]
+
+* Challenges
+- Org-mode is deeply integrated with Emacs
+  + pro - You get all the power of Emacs
+  + on the other hand - You have to learn Emacs and Emacs-Lisp
+  + Other editors can mimic the capabilities
+- Org-mode is markup /and/ functionality
+  + restructured text + Sphinx is the closest in spirit
+  + has extensibility (in Python!)
+  + currently lacks editor integration even in Emacs
+- Getting exported format perfect can be challenging
+  + this is a general problem with converting formats
+
+I wish we had an editor as powerful as Emacs that is extensible in Python.
+* Conclusions
+- Reproducible research needs new tools, new workflows
+  + Users will probably need to customize tools for their needs
+- Emacs + org-mode was a game changer in reproducible research for me. It enabled
+  + Authoring two books on using python in science and engineering
+  + A python based blog
+  + Documenting computational work
+  + Managing the work-life of an engineering professor
+- The key features that enabled this are
+  + *Extensible editor*
+  + *Extensible markup language*
+  + *Scripting* (Python + others)
+
+Thanks for your attention!
+
+http://jkitchin.github.io
+
+* Links to examples 						   :noexport:
+** Manuscript example
+[[../../manuscripts/00-submitted-TPD-scaling-TopCat/tpd-scaling.org]]
+[[../../manuscripts/00-submitted-TPD-scaling-TopCat/supporting-information.org]]
+
+** pycse
+[[../../../pycse/pycse.org]]
+
+** Blog lisp
+[[../../../.emacs.d/blogofile.el]]
+
+
+
+* Ongoing work							   :noexport:
+- An org-mode gradebook with integrated assessment/feedback
+  + Technology enhanced learning assessment server (TechELA)
+- Live workbooks for computational research
+  + 
+  + job management
+
+* build								   :noexport:
+[[elisp:(org-beamer-export-to-pdf)]]
+
+file:kitchin-emacs-orgmode-python.pdf
