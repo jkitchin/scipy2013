@@ -1,3 +1,5 @@
+#+TITLE: Emacs + org-mode + python in reproducible research
+#+AUTHOR: John Kitchin
 #+DATE: 2013-06-27 Thu
 #+OPTIONS: H:1 texht:t
 #+BEAMER_COLOR_THEME:
@@ -8,11 +10,9 @@
 #+BEAMER_THEME: default
 #+LATEX_CLASS: beamer
 #+LATEX_CLASS_OPTIONS:
-#+LATEX_HEADER: \institute{Carnegie Mellon University}
+#+LATEX_HEADER: \institute{Department of Chemical Engineering, \\Carnegie Mellon University\\Pittsburgh, PA}
 #+LATEX_HEADER_EXTRA: \titlegraphic{\includegraphics[width=\textwidth]{header}}
 #+OPTIONS: toc:nil
-#+TITLE: Emacs + org-mode + python in reproducible research
-#+AUTHOR: John Kitchin
 #+latex_header: \mode<beamer>{\usetheme{Madrid}}
 
 
@@ -24,7 +24,7 @@
     :END: 
 1. Setup a lot of calculations (perovskite.py)
 2. Run calculations (run.py)
-   a. Fix a few problem calculations by hand (nawo3.py
+   a. Fix a few problem calculations by hand (nawo3.py)
 3. Analyze calculations (analysis.py, plot*.py,...)
 4. ...(scripts4-8, miscellaneous command line work)
 5. Try to teach student steps 1-4
@@ -101,7 +101,7 @@ Emacs + org-mode + Python
       - This enables system commands to be run, and the output captured
 
 * Org-mode (http://orgmode.org/)
-"/Org mode is for keeping notes, maintaining TODO lists, planning projects, and authoring documents with a fast and effective plain-text system./"
+"/Org mode is for keeping notes, maintaining TODO lists, planning projects, and authoring documents with a fast and effective plain-text system./" - founded in 2003.
 
 - Org-mode is written in Emacs-Lisp
 - Outline mode that enables document organization
@@ -264,9 +264,10 @@ I wish we had an editor as powerful as Emacs that is extensible in Python.
 * Conclusions
 - Reproducible research needs new tools, new workflows
   + Users will probably need to customize tools for their needs
-- Emacs + org-mode was a game changer in reproducible research for me. It enabled
+- Emacs + org-mode was a game changer in reproducible research for me. It enabled:
   + Authoring two books on using python in science and engineering
   + A python based blog
+  + Scientific manuscripts with thorough documentation of data, methods, etc...
   + Documenting computational work
   + Managing the work-life of an engineering professor
 - The key features that enabled this are
@@ -289,14 +290,6 @@ https://github.com/jkitchin/scipy2013
 ** Blog lisp
 [[../../../.emacs.d/blogofile.el]]
 
-
-
-* Ongoing work							   :noexport:
-- An org-mode gradebook with integrated assessment/feedback
-  + Technology enhanced learning assessment server (TechELA)
-- Live workbooks for computational research
-  + 
-  + job management
 
 * build								   :noexport:
 [[elisp:(org-beamer-export-to-pdf)]]
