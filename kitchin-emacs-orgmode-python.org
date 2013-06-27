@@ -93,7 +93,7 @@ Data and methods tend to get lost over time as students leave, old computers die
    + Solved if text, data and code can be easily interspersed, and code can be run and output readily captured
 - Problem 3 (how did I make the figure)
    + Solved if we can keep everything together and export what we want in the form we need
-- The solution is an *editor* that can interact with the computer, a *markup language* that separates code, data and text, and a convenient *programming language*
+- The solution is an *editor* that can knows code, data and text and can interact with the system, a *markup language* that separates code, data and text, and a convenient *programming language*
 - I will present the combination of these that works best for me:
 Emacs + org-mode + Python
 * Emacs in a nutshell
@@ -256,6 +256,7 @@ pycse-2.png
     :END: 
 [[./fe-ni-al.png]]
 
+* Do some demos
 * Challenges
 - Org-mode is deeply integrated with Emacs
   + pro - You get all the power of Emacs
@@ -290,6 +291,16 @@ https://github.com/jkitchin/scipy2013
 
 * Links to examples 						   :noexport:
 
+#+BEGIN_SRC python
+import sys
+
+print sys.version
+
+# where the platform independent Python files are installed
+print sys.prefix
+#+END_SRC
+
+
 ** pycse
 Outline folding, latex rendering, blog post
 [[../../../pycse/pycse.org::6531]]
@@ -307,7 +318,6 @@ http://jkitchin.github.io
 
 clickable links
 [[../../manuscripts/01-resubmitted-IER-SO2/IER-SO2.txt::20]]
-
 
 Embed data files into document
 file:~/Dropbox/CMU/manuscripts/01-resubmitted-IER-SO2/supporting-information.org::20
